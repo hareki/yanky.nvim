@@ -44,12 +44,16 @@ function highlight.highlight_put(state)
   highlight.timer:stop()
   vim.api.nvim_buf_clear_namespace(0, highlight.hl_put, 0, -1)
 
+  local hl_group = (state.register == '+' or state.register == '*')
+    and 'SystemPutHighlight'
+    or 'RegisterPutHighlight'
+
   local region = get_region()
 
   vim.hl.range(
     0,
     highlight.hl_put,
-    "YankyPut",
+    hl_group,
     { region.start_row, region.start_col },
     { region.end_row, region.end_col },
     { regtype = vim.fn.getregtype(state.register), inclusive = true }
