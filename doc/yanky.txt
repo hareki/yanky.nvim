@@ -836,11 +836,12 @@ have to enable it in settings and set a keymap.
 
 🎨 COLORS                                *yanky-🍃-yanky.nvim-🎨-colors*
 
-  Description                       Group         Default
-  --------------------------------- ------------- ----------------
-  Highlight color for put text      YankyPut      link to Search
-  Highlight color for yanked text   YankyYanked   link to Search
-
+  Description                                 Group                 Default
+  ------------------------------------------- --------------------- ----------------
+  Highlight color for system put text         YankySystemPut        link to Search 
+  Highlight color for register put text       YankyRegisterPut      link to Search
+  Highlight color for system yanked text      YankySystemYanked     link to Search
+  Highlight color for register yanked text    YankyRegisterYanked   link to Search
 🤝 INTEGRATIONS                    *yanky-🍃-yanky.nvim-🤝-integrations*
 
 gbprod/substitute.nvim ~
