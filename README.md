@@ -718,10 +718,12 @@ end, {})
 
 ## 🎨 Colors
 
-| Description                     | Group       | Default        |
-| ------------------------------- | ----------- | -------------- |
-| Highlight color for put text    | YankyPut    | link to Search |
-| Highlight color for yanked text | YankyYanked | link to Search |
+| Description                              | Group               | Default        |
+| ---------------------------------------- | ------------------- | -------------- |
+| Highlight color for system put text      | YankySystemPut      | link to Search |
+| Highlight color for register put text    | YankyRegisterPut    | link to Search |
+| Highlight color for system yanked text   | YankySystemYanked   | link to Search |
+| Highlight color for register yanked text | YankyRegisterYanked | link to Search |
 
 ## 🤝 Integrations
 
