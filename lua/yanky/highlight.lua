@@ -9,18 +9,22 @@ function highlight.setup()
     highlight.hl_put = vim.api.nvim_create_namespace("yanky.put")
     highlight.timer = vim.loop.new_timer()
 
-    vim.api.nvim_set_hl(0, "YankyPut", { link = "Search", default = true })
+    vim.api.nvim_set_hl(0, "YankySystemPut", { link = "Search", default = true })
+    vim.api.nvim_set_hl(0, "YankyRegisterPut", { link = "Search", default = true })
   end
 
   if highlight.config.on_yank then
     vim.api.nvim_create_autocmd("TextYankPost", {
       pattern = "*",
       callback = function(_)
-        pcall(vim.hl.on_yank, { higroup = "YankyYanked", timeout = highlight.config.timer })
+        local register = vim.v.event.regname
+        local higroup = (register == "+" or register == "*") and "YankySystemYanked" or "YankyRegisterYanked"
+        pcall(vim.hl.on_yank, { higroup = higroup, timeout = highlight.config.timer })
       end,
     })
 
-    vim.api.nvim_set_hl(0, "YankyYanked", { link = "Search", default = true })
+    vim.api.nvim_set_hl(0, "YankySystemYanked", { link = "Search", default = true })
+    vim.api.nvim_set_hl(0, "YankyRegisterYanked", { link = "Search", default = true })
   end
 end
 
@@ -44,9 +48,7 @@ function highlight.highlight_put(state)
   highlight.timer:stop()
   vim.api.nvim_buf_clear_namespace(0, highlight.hl_put, 0, -1)
 
-  local hl_group = (state.register == '+' or state.register == '*')
-    and 'SystemPutHighlight'
-    or 'RegisterPutHighlight'
+  local hl_group = (state.register == "+" or state.register == "*") and "YankySystemPut" or "YankyRegisterPut"
 
   local region = get_region()
 
