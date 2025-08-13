@@ -27,7 +27,7 @@ function highlight.setup()
       callback = function(_)
         local register = vim.v.event.regname
         local higroup = (register == "+" or register == "*") and "YankySystemYanked" or "YankyRegisterYanked"
-        pcall(hl_op, { higroup = higroup, timeout = highlight.config.timer })
+        pcall(hl_op, { higroup = higroup, timeout = highlight.config.timer, priority = 9999 })
       end,
     })
 
