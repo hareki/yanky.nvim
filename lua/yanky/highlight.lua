@@ -3,6 +3,14 @@ local highlight = {}
 -- Use the non-deprecated `vim.hl` if available.
 vim.hl = vim.hl or vim.highlight
 
+local function hl_op(opts)
+  if vim.hl.hl_op then
+    return vim.hl.hl_op(opts)
+  end
+
+  return vim.hl.on_yank(opts)
+end
+
 function highlight.setup()
   highlight.config = require("yanky.config").options.highlight
   if highlight.config.on_put then
@@ -19,7 +27,7 @@ function highlight.setup()
       callback = function(_)
         local register = vim.v.event.regname
         local higroup = (register == "+" or register == "*") and "YankySystemYanked" or "YankyRegisterYanked"
-        pcall(vim.hl.on_yank, { higroup = higroup, timeout = highlight.config.timer, priority = 9999 })
+        pcall(hl_op, { higroup = higroup, timeout = highlight.config.timer, priority = 9999 })
       end,
     })
 
